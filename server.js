@@ -1,8 +1,8 @@
-// const inquirer = require("inquirer");
+const inquirer = require("inquirer");
 const mysql = require("mysql2");
 const consoleTable = require("console.table");
 
-const db = mysql.createConnection({
+const server = mysql.createConnection({
   host: "localhost",
   port: 5000,
   user: "root",
@@ -10,7 +10,7 @@ const db = mysql.createConnection({
   database: "employees_db",
 });
 
-db.connect((err) => {
+server.connect((err) => {
   if (err) throw err;
 
   runEmployeeDB();
