@@ -38,3 +38,10 @@ function addDepartment() {
         )
     })
 }
+
+function viewAllDepts() {
+
+    console.log('hello world')
+}
+
+export {addDepartment, viewAllDepts}
