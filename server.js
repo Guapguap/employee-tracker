@@ -1,4 +1,4 @@
-import inquirer from "inquirer"
+const inquirer = require('inquirer')
 const mysql = require("mysql2");
 const consoleTable = require("console.table");
 
@@ -6,18 +6,19 @@ const server = mysql.createConnection({
   host: "localhost",
   port: 5000,
   user: "root",
-  password: "", //Enter your MySQL password here.
+  password: '', //Enter your MySQL password here.
   database: "employees_db",
 });
 
 server.connect((err) => {
+  console.log(err);
   if (err) throw err;
 
-  runEmployeeDB();
+  runDatabase();
 });
 
-function runEmployeeDB() {
-  inquirer
+function runDatabase() {
+    inquirer
     .prompt([
       {
         type: "list",
@@ -55,7 +56,7 @@ function runEmployeeDB() {
 
         // Add Department 
         case "Add Department":
-            // addDept();
+            // addDepartment();
             break;
 
         // Add Role
@@ -75,7 +76,7 @@ function runEmployeeDB() {
 
         //Exit Prompt
         case "Exit":
-            connection.end();
+            // server.end();
             break;
       }
     });

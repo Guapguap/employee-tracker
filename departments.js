@@ -1,18 +1,32 @@
-function addDepartment() {
+// const inquirer = require('inquirer')
+// const mysql = require("mysql2");
+// const consoleTable = require("console.table");
 
+// function addDepartment() { 
 
-    inquirer.prompt({
+//     inquirer.prompt([
+//         {
+//           name: "name",
+//           type: "input",
+//           message: "What Department would you like to add? "
+//         },
+//         {
+//             name: "id",
+//             type: "input",
+//             message: "What is the new Department ID number? "
+//           }
 
-        type: "input",
-        message: "What is the name of the department?",
-        name: "deptName"
-
-    }).then((answer) => {
-
-        server.query("INSERT INTO department (name) VALUES (?)", [answer.deptName] , function(err, res) {
-            if (err) throw err;
-            console.table(res)
-            startScreen()
-    })
-    })
-}
+//     ]).then(function(answers) {
+//         connection.query("INSERT INTO department SET ? ",
+//             {
+//               name: answers.name,
+//               id: answers.id
+//             },
+//             function(err) {
+//                 if (err) throw err
+//                 console.table(res);
+//                 runEmployeeDB();
+//             }
+//         )
+//     })
+//   }
