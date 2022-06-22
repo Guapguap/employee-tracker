@@ -1,7 +1,7 @@
 const inquirer = require('inquirer')
 const mysql = require("mysql2");
 const consoleTable = require("console.table");
-import {addDepartment, viewAllDepts} from ('./departments')
+const department = require('./departments')
 
 const server = mysql.createConnection({
   host: "localhost",
@@ -42,7 +42,7 @@ function runDatabase() {
 
         // View All Departments
         case "View All Departments":
-            viewAllDepts();
+          department.viewAllDepts;
             break;
 
         // View All Roles
@@ -57,7 +57,7 @@ function runDatabase() {
 
         // Add Department 
         case "Add Department":
-            addDepartment() 
+          department.addDepartment();
 
         // Add Role
         case "Add Role":

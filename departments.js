@@ -44,4 +44,4 @@ function viewAllDepts() {
     console.log('hello world')
 }
 
-export {addDepartment, viewAllDepts}
+module.exports = {addDepartment, viewAllDepts}
