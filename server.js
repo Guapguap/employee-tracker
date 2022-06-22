@@ -56,8 +56,7 @@ function runDatabase() {
 
         // Add Department 
         case "Add Department":
-            // addDepartment();
-            break;
+            addDepartment() 
 
         // Add Role
         case "Add Role":
@@ -80,4 +79,33 @@ function runDatabase() {
             break;
       }
     });
+}
+
+function addDepartment() { 
+
+  inquirer.prompt([
+      {
+          name: "name",
+          type: "input",
+          message: "What Department would you like to add? "
+      },
+      {
+          name: "id",
+          type: "input",
+          message: "What is the new Department ID number? "
+      }
+
+  ]).then(function(answers) {
+      connection.query("INSERT INTO department SET ? ",
+          {
+              name: answers.name,
+              id: answers.id
+          },
+          function(err) {
+              if (err) throw err
+              console.table(res);
+              runEmployeeDB();
+          }
+      )
+  })
 }
