@@ -32,7 +32,7 @@ function addDepartment() {
             },
             function(err) {
                 if (err) throw err
-                console.table(res);
+                console.table(answers);
                 runEmployeeDB();
             }
         )
