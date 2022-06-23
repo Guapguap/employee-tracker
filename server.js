@@ -26,7 +26,7 @@ function runDatabase() {
           "Add Department",
           "Add Role",
           "Add Employee",
-          "Update Employee Role",
+          "Update Employee",
           "Exit",
         ],
       },
@@ -224,29 +224,32 @@ function addEmployee() {
 
 })
 }
-// function updateEmployee() {
-//   inquirer
-//   .prompt([
-//     {
-//       name: "eeUpdate",
-//       type: "input",
-//       message: "Which employee would you like to update?"
-//     },
 
-//     {
-//       name: "updateRole",
-//       type: "input",
-//       message: "What do you want to update to?"      
-//     }
-//   ])
-//   .then((answer) => {
-//     connection.query('UPDATE employees SET role_id=? WHERE first_name= ?',[answer.updateRole, answer.eeUpdate],function(err, res) {
-//       if (err) throw err;
-//       console.table(answer);
-//       runDatabase();
-//     });
-//   });
-// }
+function updateEmployee() {
+  inquirer
+  .prompt([
+    {
+      name: "name",
+      type: "input",
+      message: "Enter the Last Name of the employee would you like to update?"
+    },
+
+    {
+      name: "title",
+      type: "input",
+      message: "What is the employee's new title?"      
+    }
+  ])
+  .then((answer) => {
+    connection.query('UPDATE employees SET role = ? WHERE lastName = ?',[answer.title, answer.name],
+    
+    (err) => {
+      if (err) throw err;
+      console.table(answer);
+      runDatabase();
+    });
+  });
+}
 
 
 runDatabase();
