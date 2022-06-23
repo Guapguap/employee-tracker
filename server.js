@@ -129,17 +129,17 @@ function createDepartment() {
 // DEPARTMENTS SECTION END
 
 // ROLES SECTION
-// function viewAllRoles() {
-//   connection.query("SELECT role.id AS Dept_ID, role.title AS Title FROM role",
-//   function(err, res) {
-//     if (err) throw err
-//     console.log("------------------")
-//     console.log("*** ROLE LIST ***")
-//     console.log("------------------")
-//     console.table(res)
-//     runDatabase()
-// })
-// }
+function viewAllRoles() {
+  connection.query("SELECT role.id AS Dept_ID, role.title AS Title FROM role",
+  function(err, res) {
+    if (err) throw err
+    console.log("------------------")
+    console.log("*** ROLE LIST ***")
+    console.log("------------------")
+    console.table(res)
+    runDatabase()
+})
+}
 
 function addRole() { 
   connection.query("SELECT role.title AS Title, role.salary AS Salary FROM role LEFT JOIN department.name AS Department FROM department;",   function(err, res) {
