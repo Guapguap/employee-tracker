@@ -1,14 +1,6 @@
 const inquirer = require('inquirer')
-const mysql = require("mysql2");
 const consoleTable = require("console.table");
-
-const server = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: '', //Enter your MySQL password here.
-    database: "employees_db",
-});
+const connection = require('../connection');
 
 function addDepartment() { 
 
@@ -25,7 +17,7 @@ function addDepartment() {
         }
 
     ]).then(function(answers) {
-        server.query("INSERT INTO department SET ? ",
+        connection.query("INSERT INTO department SET ? ",
             {
                 name: answers.name,
                 id: answers.id
@@ -33,7 +25,7 @@ function addDepartment() {
             function(err) {
                 if (err) throw err
                 console.table(answers);
-                runEmployeeDB();
+                runDatabase();
             }
         )
     })

@@ -1,23 +1,16 @@
-const inquirer = require('inquirer')
-const mysql = require("mysql2");
+const inquirer = require('inquirer');
 const consoleTable = require("console.table");
-const department = require('./departments')
+const department = require('./routes/departments');
 
-const server = mysql.createConnection({
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: '', //Enter your MySQL password here.
-  database: "employees_db",
-});
-
-server.connect((err) => {
-  console.log(err);
-  if (err) throw err;
-
+// creates a promise with this imported file 
+const connection = require('./connection');
+// async function permisifies the function - waits for a promise to fulfill
+// async waits for a promise before executing 
+const init = async() => {
+  await connection
+  console.log('connection success');
   runDatabase();
-});
-
+}
 function runDatabase() {
     inquirer
     .prompt([
@@ -81,3 +74,5 @@ function runDatabase() {
       }
     });
 }
+
+init();
