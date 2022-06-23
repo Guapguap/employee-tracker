@@ -35,7 +35,7 @@ function runDatabase() {
       },
     ])
     .then(res =>  {
-      let choice = res.choice;
+      let choice = res.action;;
       switch (choice) {
 
         // // View All Departments

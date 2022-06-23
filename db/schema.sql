@@ -1,4 +1,6 @@
 -- CREATE DATABASE AND TABLES ===========================
+DROP DATABASE IF EXISTS employees_db;
+
 CREATE DATABASE employees_db;
 USE employees_db;
 
@@ -13,7 +15,7 @@ CREATE TABLE employees (
 
 -- DEPARTMENT TABLE ======================================
 CREATE TABLE department (
-    id INT(11) PRIMARY KEY,
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR (30)
 );
 

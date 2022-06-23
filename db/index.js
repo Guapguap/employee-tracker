@@ -6,7 +6,7 @@ class DB {
     }
 
     createDepartment(department) {
-        return this.connection.promise().query("INSERT INTO department SET ?", department);
+        return this.connection.query("INSERT INTO department SET ?", department);
     }
 }
 
