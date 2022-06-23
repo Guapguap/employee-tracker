@@ -8,10 +8,10 @@ const connection = require('./db/connection');
 
 // async function permisifies the function - waits for a promise to fulfill
 // async waits for a promise before executing 
-const init = async() => {
-  console.log('connection success');
-  runDatabase();
-}
+// const init = async() => {
+//   console.log('connection success');
+//   runDatabase();
+// }
 
 function runDatabase() {
     inquirer
@@ -84,9 +84,9 @@ function viewAllDepts() {
   connection.query("SELECT department.id AS ID, department.name AS Department FROM department",
   function(err, res) {
     if (err) throw err
-    console.log("")
+    console.log("-----------------------")
     console.log("*** DEPARTMENT LIST ***")
-    console.log("")
+    console.log("-----------------------")
     console.table(res)
     runDatabase()
 })
@@ -101,17 +101,22 @@ function createDepartment() {
         name: "name",
         type: "input",
         message: "What Department would you like to add? "
+      },
+      {
+        name: "id",
+        type: "input",
+        message: "What is the new Department ID number? "
       }
   ])
   .then((answers) => {
       connection.query("INSERT INTO department SET ? ",
           {
             name: answers.name,
-            // id: answers.id
+            id: answers.id
           },
-          (err, res) => {
+          (err) => {
               if (err) throw err
-              console.table(res);
+              console.table(answers);
               
           }
       )
@@ -120,7 +125,49 @@ function createDepartment() {
 }
 // DEPARTMENTS SECTION END
 
+// ROLES SECTION
+// function viewAllRoles() {
+//   connection.query("SELECT role.id AS Dept_ID, role.title AS Title FROM role",
+//   function(err, res) {
+//     if (err) throw err
+//     console.log("------------------")
+//     console.log("*** ROLE LIST ***")
+//     console.log("------------------")
+//     console.table(res)
+//     runDatabase()
+// })
+// }
+
+function addRole() { 
+  connection.query("SELECT role.title AS Title, role.salary AS Salary FROM role LEFT JOIN department.name AS Department FROM department;",   function(err, res) {
+    inquirer.prompt([
+        {
+          name: "title",
+          type: "input",
+          message: "What is name of the new role?"
+        },
+        {
+          name: "salary",
+          type: "input",
+          message: "What is the salary of the new role?"
+        } ,
+        {
+          name: "deptID",
+          type: "input",
+          message: "What is the department id number?"
+        }
+    ]).then((answer) => {
+          connection.query(`INSERT INTO role (title, salary, departmentID) 
+          VALUES (?, ?, ?)`, 
+          [answer.title, answer.salary, answer.deptID], 
+          (err, res) => {
+            if (err) throw err;
+            console.table(res);
+            runDatabase();
+          });
+        });;
+  });
+};
 
 
-
-init();
+runDatabase();
