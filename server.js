@@ -101,13 +101,7 @@ function createDepartment() {
         name: "name",
         type: "input",
         message: "What Department would you like to add? "
-      },
-      // {
-      //     name: "id",
-      //     type: "input",
-      //     message: "What is the new Department ID number? "
-      //   }
-
+      }
   ])
   .then((answers) => {
       connection.query("INSERT INTO department SET ? ",
