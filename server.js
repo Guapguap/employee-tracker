@@ -30,12 +30,12 @@ function runDatabase() {
         ],
       },
     ])
-    .then((answers) => {
+    .then((answers) => async {
       switch (answers.action) {
 
         // View All Departments
         case "View All Departments":
-          department.viewAllDepts;
+          // department.viewAllDepts;
             break;
 
         // View All Roles
@@ -50,7 +50,7 @@ function runDatabase() {
 
         // Add Department 
         case "Add Department":
-          department.addDepartment();
+          await department.addDepartment();
 
         // Add Role
         case "Add Role":

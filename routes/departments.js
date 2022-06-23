@@ -24,7 +24,7 @@ function addDepartment() {
             },
             function(err) {
                 if (err) throw err
-                console.table(answers);
+                console.log(answers);
                 runDatabase();
             }
         )
