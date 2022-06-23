@@ -20,17 +20,37 @@ function runDatabase() {
         name: "action",
         choices: [
           {
+            name: "View All Departments",
+            value: "VIEW_DEPARTMENT"
+          },
+          {
+            name: "View All Roles",
+            value: "VIEW_ROLES"
+          },
+          {
+            name: "View All Employees",
+            value: "VIEW_EMPLOYEES"
+          },
+          {
             name: "Add Department",
             value: "ADD_DEPARTMENT"
           },
-        //   "View All Departments",
-        //   "View All Roles",
-        //   "View All Employees",
-        //   "Add Department",
-        //   "Add Role",
-        //   "Add Employee",
-        //   "Update Employee Role",
-        //   "Exit",
+          {
+            name: "Add Role",
+            value: "ADD_ROLE"
+          },
+          {
+            name: "Add Employee",
+            value: "ADD_EMPLOYEE"
+          },
+          {
+            name: "Update Employee Role",
+            value: "UPDATE_ROLE"
+          },
+          {
+            name: "Exit",
+            value: "EXIT"
+          }
         ],
       },
     ])
@@ -98,5 +118,8 @@ function addDepartment() {
         .then(() => runDatabase())
     })
 }
+
+
+
 
 init();
