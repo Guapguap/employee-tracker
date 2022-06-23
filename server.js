@@ -15,10 +15,14 @@ function runDatabase() {
     inquirer
     .prompt([
       {
-        // type: "list",
-        // message: "What would you like to do today?",
-        // name: "action",
-        // choices: [
+        type: "list",
+        message: "What would you like to do today?",
+        name: "action",
+        choices: [
+          {
+            name: "Add Department",
+            value: "ADD_DEPARTMENT"
+          },
         //   "View All Departments",
         //   "View All Roles",
         //   "View All Employees",
@@ -27,7 +31,7 @@ function runDatabase() {
         //   "Add Employee",
         //   "Update Employee Role",
         //   "Exit",
-        // ],
+        ],
       },
     ])
     .then(res =>  {
