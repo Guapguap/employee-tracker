@@ -1,16 +1,18 @@
 const inquirer = require('inquirer');
 require("console.table");
-const department = require('./routes/departments');
-const db = require("./db");
-
 // creates a promise with this imported file 
 const connection = require('./db/connection');
+
+// const db = require("./db");
+
+
 // async function permisifies the function - waits for a promise to fulfill
 // async waits for a promise before executing 
 const init = async() => {
   console.log('connection success');
   runDatabase();
 }
+
 function runDatabase() {
     inquirer
     .prompt([
@@ -18,106 +20,111 @@ function runDatabase() {
         type: "list",
         message: "What would you like to do today?",
         name: "action",
-        choices: [
-          {
-            name: "View All Departments",
-            value: "VIEW_DEPARTMENT"
-          },
-          {
-            name: "View All Roles",
-            value: "VIEW_ROLES"
-          },
-          {
-            name: "View All Employees",
-            value: "VIEW_EMPLOYEES"
-          },
-          {
-            name: "Add Department",
-            value: "ADD_DEPARTMENT"
-          },
-          {
-            name: "Add Role",
-            value: "ADD_ROLE"
-          },
-          {
-            name: "Add Employee",
-            value: "ADD_EMPLOYEE"
-          },
-          {
-            name: "Update Employee Role",
-            value: "UPDATE_ROLE"
-          },
-          {
-            name: "Exit",
-            value: "EXIT"
-          }
-        ],
+        choices: [ 
+          "View All Departments",
+          "View All Roles",
+          "View All Employees",
+          "Add Department",
+          "Add Role",
+          "Add Employee",
+          "Update Employee Role",
+          "Exit"
+          ]
       },
     ])
-    .then(res =>  {
-      let choice = res.action;;
-      switch (choice) {
+    .then(function(answers) {
+      switch (answers.action) {
 
-        // // View All Departments
-        // case "View All Departments":
-        //   // department.viewAllDepts;
-        //     break;
+          case "View All Employees":
+              viewAllEmployees();
+          break;
 
-        // // View All Roles
-        // case "View All Roles":
-        //     // viewAllRoles();
-        //     break;
+          case "View All Departments":
+              viewAllDepts();
+          break;
 
-        // // View all Employees 
-        // case "View All Employees":
-        //     // viewAllEmployees();
-        //     break;
+          case "View All Roles":
+              viewAllRoles();
+          break;
+              
+          case "View All Employees by Department":
+              viewEmployeesByDept();
+          break;
 
-        // Add Department 
-          case "ADD_DEPARTMENT":
-              addDepartment();
-              break;
+          case "View All Employees by Role":
+              viewEmployeesByRole();
+          break;
 
-        // // Add Role
-        // case "Add Role":
-        //     // addRole();
-        //     break;
+          case "Add Department":
+              createDepartment();
+          break;
 
-        // // Add Employee 
-        // case "Add Employee":
-        //     // addEmployee();
-        //     break;
+          case "Add Role":
+              addRole();
+          break;
 
-        // // Update Employee Role 
-        // case "Update Employee Role":
-        // //   updateEmployeeRole();
-        //     break;
+          case "Add Employee":
+              addEmployee();
+          break;
 
-        //Exit Prompt
-        // case "Exit":
-        //   process.exit();
-        //   break;
-        default:
-        process.exit();
-      }
+          case "Update Employee Role":
+              updateEmployeeRole();
+          break;
+
+          case "Exit":
+              console.log("Goodbye");
+              connection.end();
+          break;
+          }
     });
 }
 
-function addDepartment() {
-  inquirer 
-  .prompt([
-    {
-      name: "name",
-      message: "What is the name of the department?"
-    }
-  ])
-    .then(res => {
-      let name = res;
-      db.createDepartment(name)
-        .then(() => console.log(`Added ${name.name} to the database`))
-        .then(() => runDatabase())
-    })
+// DEPARTMENTS SECTION
+function viewAllDepts() {
+  connection.query("SELECT department.id AS ID, department.name AS Department FROM department",
+  function(err, res) {
+    if (err) throw err
+    console.log("")
+    console.log("*** DEPARTMENT LIST ***")
+    console.log("")
+    console.table(res)
+    runDatabase()
+})
 }
+
+// ------------------------
+
+function createDepartment() { 
+
+  inquirer.prompt([
+      {
+        name: "name",
+        type: "input",
+        message: "What Department would you like to add? "
+      },
+      // {
+      //     name: "id",
+      //     type: "input",
+      //     message: "What is the new Department ID number? "
+      //   }
+
+  ])
+  .then((answers) => {
+      connection.query("INSERT INTO department SET ? ",
+          {
+            name: answers.name,
+            // id: answers.id
+          },
+          (err, res) => {
+              if (err) throw err
+              console.table(res);
+              
+          }
+      )
+      .then(runDatabase());
+  })
+}
+// DEPARTMENTS SECTION END
 
 
 
