@@ -109,6 +109,8 @@ function createDepartment() {
       }
   ])
   .then((answers) => {
+
+    // inserting the following key value pairs into the table 
       connection.query("INSERT INTO department SET ? ",
           {
             name: answers.name,
@@ -116,11 +118,12 @@ function createDepartment() {
           },
           (err) => {
               if (err) throw err
+
+              // stores answers in table 
               console.table(answers);
-              
+              runDatabase()
           }
       )
-      .then(runDatabase());
   })
 }
 // DEPARTMENTS SECTION END
