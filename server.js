@@ -3,15 +3,6 @@ require("console.table");
 // creates a promise with this imported file
 const connection = require("./db/connection");
 
-// const db = require("./db");
-
-// async function permisifies the function - waits for a promise to fulfill
-// async waits for a promise before executing
-// const init = async() => {
-//   console.log('connection success');
-//   runDatabase();
-// }
-
 function runDatabase() {
   inquirer
     .prompt([
@@ -249,6 +240,19 @@ function updateEmployee() {
       runDatabase();
     });
   });
+}
+
+function viewAllEmployees() {
+    
+  connection.query("SELECT * FROM employees;", 
+  function(err, res) {
+    if (err) throw err
+    console.log ("---------------------");
+    console.log("*** EMPLOYEES LIST ***");
+    console.log ("---------------------");
+    console.table(res)
+    runDatabase()
+})
 }
 
 
