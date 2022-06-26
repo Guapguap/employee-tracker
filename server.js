@@ -115,8 +115,7 @@ function addDepartment() {
 
 // ROLES SECTION
 function viewAllRoles() {
-  connection.query(
-    "SELECT role.id AS Dept_ID, role.title AS Title FROM role",
+  connection.query("SELECT * FROM role;",
     function (err, res) {
       if (err) throw err;
       console.log("------------------");
