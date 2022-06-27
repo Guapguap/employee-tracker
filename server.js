@@ -86,11 +86,29 @@ function addDepartment() {
         name: "name",
         type: "input",
         message: "What Department would you like to add? ",
+        validate: userInput => {
+          if (userInput) {
+              return true;
+          } else {
+              console.log ("Please enter a department name");
+              return false; 
+          }
+      }
       },
       {
         name: "id",
         type: "input",
         message: "What is the new Department ID number? ",
+        validate: userInput => {
+
+          // using isNaN to validate if the value is a number 
+          if  (isNaN(userInput)) {
+              console.log ("Please enter the new Department ID number")
+              return false; 
+          } else {
+              return true;
+          }
+      }
       },
     ])
     .then((answers) => {
@@ -140,17 +158,46 @@ function addRole() {
             name: "title",
             type: "input",
             message: "What is name of the new role?",
+            validate: userInput => {
+              if (userInput) {
+                  return true;
+              } else {
+                  console.log ("Please enter the name of the new role");
+                  return false; 
+              }
+          }
           },
           {
             name: "salary",
             type: "input",
             message: "What is the salary of the new role?",
+            validate: userInput => {
+
+              // using isNaN to validate if the value is a number 
+              if  (isNaN(userInput)) {
+                  console.log ("Please enter the salary of the new role")
+                  return false; 
+              } else {
+                  return true;
+              }
+          }
           },
           {
             name: "deptID",
             type: "input",
             message: "What is the department id number?",
+            validate: userInput => {
+
+              // using isNaN to validate if the value is a number 
+              if  (isNaN(userInput)) {
+                  console.log ("Please enter the Department ID number")
+                  return false; 
+              } else {
+                  return true;
+              }
+          }
           },
+          
         ])
         .then((answer) => {
           connection.query(
@@ -180,22 +227,57 @@ function addEmployee() {
       {
         name: "firstName",
         type: "input",
-        message: "First Name of employee: "
+        message: "First Name of employee: ",
+        validate: userInput => {
+          if (userInput) {
+              return true;
+          } else {
+              console.log ("Please enter a first name");
+              return false; 
+          }
+      }
       },
+      
       {
         name: "lastName",
         type: "input",
-        message: "Last Name of employee: "
+        message: "Last Name of employee: ",
+        validate: userInput => {
+          if (userInput) {
+              return true;
+          } else {
+              console.log ("Please enter a last name");
+              return false; 
+          }
+      }
       },
       {
         name: "role",
         type: "input",
-        message: "Is the new employee an Intern, Assistant, or Apprentice? "
+        message: "Is the new employee an Intern, Assistant, or Apprentice? ",
+        validate: userInput => {
+          if (userInput) {
+              return true;
+          } else {
+              console.log ("Please enter the role of the employee");
+              return false; 
+          }
+      }
       },
       {
           name: "manager",
           type: "input",
           message: "Who is managing the new employee? 1. Tom or 2. John: ", 
+          validate: userInput => {
+
+            // using isNaN to validate if the value is a number 
+            if  (isNaN(userInput)) {
+                console.log ("Please enter the ID number of the manager")
+                return false; 
+            } else {
+                return true;
+            }
+        }
       }
 
   ]).then((answer) => {
@@ -221,13 +303,29 @@ function updateEmployee() {
     {
       name: "name",
       type: "input",
-      message: "Enter the Last Name of the employee would you like to update?"
+      message: "Enter the Last Name of the employee would you like to update?",
+      validate: userInput => {
+        if (userInput) {
+            return true;
+        } else {
+            console.log ("Please enter the last name of the employee you like to update");
+            return false; 
+        }
+    }
     },
 
     {
       name: "title",
       type: "input",
-      message: "What is the employee's new title?"      
+      message: "What is the employee's new title?",
+      validate: userInput => {
+        if (userInput) {
+            return true;
+        } else {
+            console.log ("Please enter the employee's new title");
+            return false; 
+        }
+    }      
     }
   ])
   .then((answer) => {
