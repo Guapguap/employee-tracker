@@ -7,6 +7,10 @@ An application that can be used to manage an employee database.
 
 # Demo:
 
+
+https://user-images.githubusercontent.com/102185104/175840120-19f55236-9cb3-4953-b554-f9f2b562ab82.mp4
+
+
 # Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
