@@ -352,5 +352,4 @@ function viewAllEmployees() {
 })
 }
 
-
 runDatabase();
